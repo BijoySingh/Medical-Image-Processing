@@ -1,4 +1,5 @@
 function showImage( image, image_title )
+image = abs(image);
 figure;
 my_num_of_colors = 200;
 my_color_scale = [ [0:1/(my_num_of_colors-1):1]' , ...
