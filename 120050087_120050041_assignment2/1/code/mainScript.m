@@ -1,8 +1,34 @@
-g = [1, 0; 0.866, 0.5; 0.5, 0.866; ...
-    0, 1; -0.5, 0.866; -0.866, 0.5];
-S = [0.5045 - 0.0217i; 0.6874 + 0.0171i; 0.3632 + 0.1789i; ...
-    0.3483 + 0.1385i; 0.2606 - 0.0675i; 0.2407 + 0.1517i];
-S0 = 1;
-b0 = 0.1;
+close all;
+clear all;
 
-getDMatrix(S0, b0, S, g);
+%% Part a)
+	% getDmatrix function estimates the D matrix using the Levenberg-Marquadtt Optimization using a Cholesky Decomposition of D.
+intitial_l1 = 0.1;
+intitial_l2 = 0.1;
+intitial_l3 = 0.1;
+[D,L,objective,d1,d2,d3,d4] = getDMatrix(intitial_l1,intitial_l2,intitial_l3);
+
+disp('The estimate of D is :');
+disp(D);
+
+	% Plot the log(objective) and di's as a function of iterations
+figure;
+plot(objective);
+title('Log(objective)  vs. iteration');
+plotD(d1,d2,d3,d4);
+
+%% Part b) 
+	% The diffusion is mac along the principal vector ie. the max eigenvector of D
+
+[U,S,V] = svd(L);
+principalVector = U(:,1);
+
+disp('The direction along which max. diffusion takes place is :');
+disp(principalVector);
+
+%% Part c)
+	% The multiplication factor is just the ratio of the eigenvectors in the corresponding directions.
+multiplicationFactor = U(:,1)./U(:,2);
+
+disp('The multiplication factor along principalVector and orthogonal vector is :');
+disp(multiplicationFactor);
