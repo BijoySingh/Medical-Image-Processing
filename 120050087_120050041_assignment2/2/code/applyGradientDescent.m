@@ -1,11 +1,13 @@
-function estimate = applyGradientDescent( imageNoisy, algorithm, ...
-    alpha, gamma)
+function [estimate, likelyhood_series] = applyGradientDescent( imageNoisy, algorithm, ...
+    alpha, gamma, to_plot)
+    if nargin < 5
+        to_plot = 0;
+    end
     [rows, columns] = size(imageNoisy);
     lambda = ones(rows, columns);
     estimate = imageNoisy;
     
-%      likelyhood_series = zeros(1, 100);
-%     rrmse_series = zeros(1, 100);
+    likelyhood_series = zeros(1, 100);
     
     for i = 1:100
         [likelyhood, derivative] = ... 
@@ -22,11 +24,9 @@ function estimate = applyGradientDescent( imageNoisy, algorithm, ...
         estimate(limits) = new_estimate(limits);
         lambda(~limits) = lambda(~limits) / 2;
         
-%         likelyhood_series(1, i) = norm(likelyhood);
-%         rrmse_series(1, i) = rrmse(imageNoiseless, estimate);
+        if to_plot == 1
+            likelyhood_series(1, i) = norm(likelyhood);
+        end;
     end
-    
-%     figure; plot(1:100, rrmse_series);
-%      figure; plot(1:100, likelyhood_series);
 end
 

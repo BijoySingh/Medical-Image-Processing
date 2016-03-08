@@ -1,0 +1,8 @@
+function sigma = getNoiseLevel(imageNoisy)
+ep_1 = imageNoisy(1:128, 1:40);
+ep_2 = imageNoisy(169:255, 1:28);
+ep_3 = imageNoisy(186:239, 214:255);
+ep_4 = imageNoisy(1:30239, 226:255);
+
+v_1 = vectorize(ep_1);
+end

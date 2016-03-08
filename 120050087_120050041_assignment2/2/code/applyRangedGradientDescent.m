@@ -12,7 +12,7 @@ function [ best_estimate, min_rrmse, best_alpha, best_gamma ] = ...
     for r = 1:alphas
         alpha = alpha_range(1, r);
         for c = 1:gammas
-            gamma = gamma_range(1, r);
+            gamma = gamma_range(1, c);
             estimate = applyGradientDescent(imageNoisy, algorithm, alpha, gamma);
             estimates(r, c) = rrmse(imageNoiseless, estimate);
 
