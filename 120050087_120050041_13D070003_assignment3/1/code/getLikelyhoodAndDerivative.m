@@ -1,6 +1,6 @@
-function [ likelyhood, derivative ] = getLikelyhoodAndDerivative( imageNoisy, estimate, algorithm, alpha, gamma, imageKspaceMask)
-    likelyhood = alpha * getSparseAcquistion(imageNoisy, estimate, imageKspaceMask);
-    derivative = alpha * getSparseAcquistionDerivative(imageNoisy, estimate, imageKspaceMask);
+function [ likelyhood, derivative ] = getLikelyhoodAndDerivative( imageKspaceData, estimate, algorithm, alpha, gamma, imageKspaceMask)
+    likelyhood = alpha * getSparseAcquistion(imageKspaceData, estimate, imageKspaceMask);
+    derivative = alpha * getSparseAcquistionDerivative(imageKspaceData, estimate, imageKspaceMask);
     
     if algorithm == 1
         likelyhood = likelyhood + (1 - alpha) * getMRFQuadratic(estimate);

@@ -1,6 +1,6 @@
 function [ best_estimate, min_rrmse, best_alpha, best_gamma ] = ...
     applyRangedGradientDescent(alpha_range, gamma_range, ...
-    best_estimate, min_rrmse, imageNoisy, imageNoiseless, algorithm, ...
+    best_estimate, min_rrmse, imageKspaceData, imageNoiseless, algorithm, ...
     best_alpha, best_gamma, imageKspaceMask)
 
     alphas = size(alpha_range, 2);
@@ -13,7 +13,7 @@ function [ best_estimate, min_rrmse, best_alpha, best_gamma ] = ...
         alpha = alpha_range(1, r);
         for c = 1:gammas
             gamma = gamma_range(1, r);
-            estimate = applyGradientDescent(imageNoisy, algorithm, alpha, gamma, imageKspaceMask);
+            estimate = applyGradientDescent(imageKspaceData, algorithm, alpha, gamma, imageKspaceMask);
             estimates(r, c) = rrmse(imageNoiseless, estimate);
 
             if min_rrmse > estimates(r, c)
