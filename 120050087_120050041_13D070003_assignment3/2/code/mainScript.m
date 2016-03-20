@@ -7,7 +7,7 @@ min_rrmse = 10000000;
 best_estimate = 0;
 figure; imshow(abs(ifft2(imageKspaceData))); title('Inverse Fourier-kspaceData');
 
-%% Quadratic Prior 1 
+%% Quadratic Prior 1
 algorithm = 1;
 best_alpha = 0.0001;
 best_gamma = 0.00;
