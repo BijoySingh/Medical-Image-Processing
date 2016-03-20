@@ -1,9 +1,9 @@
-function G = getMRFAdaptive( image, gama )
+function G = getMRFAdaptive( image, gamma )
     G = zeros(size(image, 1), size(image, 2));
     
     for dim = 1:4
         Gt = getModU(image, dim);
-        Gt = gama * Gt - gama * gama * log (1 + Gt / gama);
+        Gt = gamma * Gt - gamma * gamma * log (1 + Gt / gamma);
         G = G + Gt;
     end
 end
