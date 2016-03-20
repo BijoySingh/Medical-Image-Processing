@@ -17,12 +17,12 @@ function [estimate, likelyhood_series] = applyGradientDescent( imageKspaceData, 
             getLikelyhoodAndDerivative(imageKspaceData, ...
             new_estimate, algorithm, alpha, gamma, imageKspaceMask);
 
-        limits = (real(new_likelyhood) < real(likelyhood));
+        limits = (abs(new_likelyhood) < abs(likelyhood));
         lambda(limits) = 1.1 * lambda(limits);
         estimate(limits) = new_estimate(limits);
         lambda(~limits) = lambda(~limits) / 2;
         
-        likelyhood_series(1, i) = norm(likelyhood);
+        likelyhood_series(1, i) = sum(sum(abs(likelyhood)));
     end
 end
 
