@@ -4,12 +4,12 @@ function estimate = applyGradientDescent( imageKspaceData, algorithm, ...
     lambda = ones(rows, columns);
     estimate = abs(ifft2(imageKspaceData));
     
-%      likelyhood_series = zeros(1, 100);
-    rrmse_series = zeros(1, 300);
-    rrmse_old = 1;
-    rrmse_new = 0;
+    n_iters = 250;
+    rrmse_series = zeros(1, n_iters);
+    rrmse_old = rrmse(imageNoiseless,abs(ifft2(imageKspaceData)));
+    rrmse_new = 1;
     i = 1;
-    while abs(rrmse_old - rrmse_new)/rrmse_old < 1e-90 || i < 300
+    for i=1:n_iters
         [likelyhood, derivative] = ... 
             getLikelyhoodAndDerivative(imageKspaceData, ...
             estimate, algorithm, alpha, gama, imageKspaceMask);
@@ -33,10 +33,7 @@ function estimate = applyGradientDescent( imageKspaceData, algorithm, ...
             rrmse_new = rrmse(imageNoiseless, estimate);
             rrmse_old = rrmse(1,i-1);
         end
-        i = i +1;
     end
-    
-    figure; plot(1:300, rrmse_series);
-%      figure; plot(1:100, likelyhood_series);
+     figure; plot(1:n_iters, rrmse_series);
 end
 
