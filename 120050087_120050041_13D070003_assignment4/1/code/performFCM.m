@@ -11,11 +11,10 @@ bias_field = 0.5*ones(m,n);
 [reference_image,initial_means] = kmeans(reshape(cropped_image,[m*n,1]),4);
 
 reference_image =reshape(reference_image,[m,n]);
-idx = find(initial_means<0.1);
 initial_segment=zeros(m,n,3);
 j=0;
 for i=1:4
-    if i~=idx
+    if i~=find(initial_means<0.1);
         j=j+1;
         initial_segment(:,:,j)=(reference_image==i)*initial_means(i);
     end
