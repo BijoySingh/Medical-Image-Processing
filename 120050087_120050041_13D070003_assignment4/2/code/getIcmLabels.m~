@@ -30,7 +30,7 @@ function [X, u, s] = getIcmLabels( Y, M, K, X, u, s, beta, show_values )
    end;
    
    if show_values == 1
-    display(sprintf('ICM : P(x | y, beta, theta) : %d => %d', original_cummulative_value, cummulative_value));
+    display(sprintf('P(ICM : %d => %d', original_cummulative_value, cummulative_value));
    end;
    
    

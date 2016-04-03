@@ -1,12 +1,11 @@
-function X = getEMLabels( Y, M, K, X, u, s, beta )
+function [X, Gamma] = getEMLabels( Y, M, K, X, u, s, beta, show_values )
    [r, c] = size(Y);
    
    Gamma = zeros(r, c, K);
    membership_beta = beta;
    
    for count = 1:25
-       [X, u, s] = getIcmLabels( Y, M, K, X, u, s, beta );
-       display([u, s]);
+       [X, u, s] = getIcmLabels( Y, M, K, X, u, s, beta, show_values);
        
        for i = 2:r-1
            for j = 2:c-1
@@ -43,9 +42,6 @@ function X = getEMLabels( Y, M, K, X, u, s, beta )
            s(1, label) = sqrt(S / D);
        end;
    end; 
-   
-   showImage(Gamma(:, :, 1), 'Label 1 Membership');
-   showImage(Gamma(:, :, 2), 'Label 2 Membership');
-   showImage(Gamma(:, :, 3), 'Label 3 Membership');
+
 end
 
