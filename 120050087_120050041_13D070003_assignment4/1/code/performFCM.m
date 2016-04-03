@@ -6,10 +6,10 @@ function [segmented_image, class_membership, class_means, bias_field, bias_remov
 objective_function = [];
 
 weights = fspecial('gaussian');
+figure;imshow(weights,[]);
 bias_field = 0.5*ones(m,n);
 
 [reference_image,initial_means] = kmeans(reshape(cropped_image,[m*n,1]),4);
-
 reference_image =reshape(reference_image,[m,n]);
 initial_segment=zeros(m,n,3);
 j=0;

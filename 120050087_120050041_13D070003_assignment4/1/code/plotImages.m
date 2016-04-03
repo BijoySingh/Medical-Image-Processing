@@ -12,7 +12,7 @@ figure; imshow(class_membership(:,:,3)); title('Class 3 Binary');
 figure; imshow(cropped_image); title('corrupted input Image(cropped)');
 figure; imshow(bias_field); title('Bias Removed Image');
 figure; imshow(bias_removed_image); title('optimal bias field');
-figure; imshow(residual_image); title('residual Image');
+figure; imshow(residual_image,[]); title('residual Image');
 
 %% Log(Objective)vs iterations
 figure;plot(objective_function);
